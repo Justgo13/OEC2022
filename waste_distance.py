@@ -37,19 +37,19 @@ def get_processing(A,B, all_objects):
     cost_matrix=risk_matrix+distance_cost
     row, column = cost_matrix.argmin() // cost_matrix.shape[1], cost_matrix.argmin() % cost_matrix.shape[1]
     selected_local_sort = df_local_sort.iloc[row]
-    selected_region_sort = df_local_sort.iloc[column]
+    selected_region_sort = df_regional_sort.iloc[column]
     dist_arg1 = df_regional_recycling['longitude'].to_numpy() - selected_region_sort.longitude
-    dist_arg2 = df_regional_recycling['lattitude'].to_numpy() - selected_region_sort.lattitude
+    dist_arg2 = df_regional_recycling['latitude'].to_numpy() - selected_region_sort.latitude
     dist_args = np.square(dist_arg1) + np.square(dist_arg2)
     selected_recycle = df_regional_recycling.iloc[np.argmin(dist_args)]
     dist_x = df_waste['longitude'].to_numpy() - selected_recycle.longitude
-    dist_y = df_waste['lattitude'].to_numpy() - selected_recycle.lattitude
+    dist_y = df_waste['latitude'].to_numpy() - selected_recycle.latitude
     distances = np.square(dist_x) + np.square(dist_y)
     final_node_index = np.argmin(distances)
     final_node = df_waste.iloc[final_node_index]
 
     output = get_waste(final_node_index, df_waste)
-    output+=[selected_local_sort['id'], selected_region_sort['id'], selected_recycle['id']]
+    output += [selected_local_sort, selected_region_sort, selected_recycle]
     return output
 
 
@@ -63,7 +63,6 @@ def get_waste(final_waste_index, df_waste):
     df_waste = df_waste.drop(final_waste_index)
     # get first node
     current_node = df_waste.iloc[0]
-    #print("First waste node", current_node)
     waste_node_path = []
     waste_node_path.append(current_node)
     # get distance from current node to nearest node and add to a list
@@ -83,9 +82,9 @@ def get_waste(final_waste_index, df_waste):
         min_distance_index = np.argmin(distances)
         nearest_waste_node = df_waste.iloc[min_distance_index]
         # add this node to the list of nodes
-        waste_node_path.append(nearest_waste_node['id'])
+        waste_node_path.append(nearest_waste_node)
         # nearest node is now current node
         current_node = nearest_waste_node
-    waste_node_path.append(final_node['id'])
+    waste_node_path.append(final_node)
     return waste_node_path
 

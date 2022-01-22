@@ -1,11 +1,12 @@
 import math
 import sys
+from tkinter import filedialog
 
 # helper function to read from a csv file and return the info in a list
 # can be used when: read from map & read from path (if the path file is also csv)
 def read_from_csv(file_name):
     res = []
-    with open(file_name + ".csv") as csv_file:
+    with open(file_name) as csv_file:
         node = [line.split(",") for line in csv_file]
         for i, info in enumerate(node):
             #print ("line{0} = {1}".format(i, info))
@@ -229,5 +230,11 @@ def convert_str_node(node_str):
 # if (valid_flag):
 #     QoR = (total_loss + total_distance) #*run time
 #     print(QoR)
+
+if __name__ == "__main__":
+    map = filedialog.askopenfilename(title='"pen')
+    solution = filedialog.askopenfilename(title='"pen')
+
+    print(validator(map, solution, 0.5, 0.5))
 
 
