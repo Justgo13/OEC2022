@@ -1,5 +1,5 @@
 ## OEC Overview
-OEC (Ontario Engineering Competition) is a provincial wide competition with various engineering categories such as re-engineering, design, programming etc.
+OEC (Ontario Engineering Competition) is a provincial wide competition against other universities featuring various engineering categories such as re-engineering, design, programming etc.
 
 ## Problem statement
 The problem was to find the optimal path that a plastic collecting vehicle can take while minimizing plastic lost and distance travelled while keeping a QoR metric as low 
