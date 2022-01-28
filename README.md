@@ -17,7 +17,7 @@ Python
 ## How-to run
 
 - Run file `gui.py` to open the dialog in which you can select the map you would like to run
-- Map files can be found in the Test_Case folder
+- Map files can be found in the TestCases folder
 
 ## Note
  - Large and medium size maps won't render in the GUI
